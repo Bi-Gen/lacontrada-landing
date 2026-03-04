@@ -1,6 +1,6 @@
 /**
  * LA CONTRADA RISTORANTE
- * Scroll-Driven Video Landing Page
+ * Premium Luxury Scroll-Driven Landing Page
  *
  * Features:
  * - Canvas frame rendering synced to scroll
@@ -8,6 +8,9 @@
  * - Multiple animation types
  * - Staggered reveals
  * - Counter animations
+ * - Custom cursor with smooth follow
+ * - Magnetic buttons
+ * - Premium hover effects
  */
 
 // ===========================================
@@ -49,12 +52,22 @@ const canvas = document.getElementById('frame-canvas');
 const canvasContainer = document.getElementById('canvas-container');
 const ctx = canvas.getContext('2d');
 
+// Luxury Elements
+const cursor = document.querySelector('.cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+const header = document.querySelector('.site-header');
+const magneticElements = document.querySelectorAll('[data-magnetic]');
+
 // State
 let lenis;
 let isLoaded = false;
 let frames = [];
 let currentFrame = 0;
 let imagesLoaded = 0;
+let mouseX = 0;
+let mouseY = 0;
+let cursorX = 0;
+let cursorY = 0;
 
 // ===========================================
 // FRAME LOADING SYSTEM
@@ -534,6 +547,133 @@ function initHeroFade() {
 }
 
 // ===========================================
+// CUSTOM CURSOR (Luxury)
+// ===========================================
+
+function initCustomCursor() {
+  // Skip on touch devices
+  if (!cursor || !cursorDot || window.matchMedia('(hover: none)').matches) return;
+
+  // Track mouse position
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    // Move dot immediately
+    gsap.set(cursorDot, {
+      x: mouseX,
+      y: mouseY,
+    });
+  });
+
+  // Smooth cursor follow animation
+  gsap.ticker.add(() => {
+    const speed = 0.15;
+    cursorX += (mouseX - cursorX) * speed;
+    cursorY += (mouseY - cursorY) * speed;
+
+    gsap.set(cursor, {
+      x: cursorX,
+      y: cursorY,
+    });
+  });
+
+  // Hover effects on interactive elements
+  const hoverTargets = document.querySelectorAll('a, button, .stat');
+  const ctaTargets = document.querySelectorAll('.cta-button, .nav-cta');
+
+  hoverTargets.forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hover');
+    });
+  });
+
+  ctaTargets.forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.remove('hover');
+      cursor.classList.add('hover-cta');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hover-cta');
+    });
+  });
+
+  // Hide cursor when leaving window
+  document.addEventListener('mouseleave', () => {
+    gsap.to([cursor, cursorDot], {
+      opacity: 0,
+      duration: 0.3,
+    });
+  });
+
+  document.addEventListener('mouseenter', () => {
+    gsap.to([cursor, cursorDot], {
+      opacity: 1,
+      duration: 0.3,
+    });
+  });
+}
+
+// ===========================================
+// MAGNETIC BUTTON EFFECT (Luxury)
+// ===========================================
+
+function initMagneticButtons() {
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  magneticElements.forEach((el) => {
+    const wrapper = el.closest('.magnetic-wrap');
+    if (!wrapper) return;
+
+    wrapper.addEventListener('mousemove', (e) => {
+      const rect = wrapper.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(el, {
+        x: x * 0.3,
+        y: y * 0.3,
+        duration: 0.4,
+        ease: 'power2.out',
+      });
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+      gsap.to(el, {
+        x: 0,
+        y: 0,
+        duration: 0.6,
+        ease: 'elastic.out(1, 0.5)',
+      });
+    });
+  });
+}
+
+// ===========================================
+// HEADER SCROLL EFFECT (Luxury)
+// ===========================================
+
+function initHeaderScroll() {
+  if (!header) return;
+
+  ScrollTrigger.create({
+    trigger: scrollContainer,
+    start: 'top top',
+    end: 'bottom bottom',
+    onUpdate: (self) => {
+      if (self.progress > 0.02) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    },
+  });
+}
+
+// ===========================================
 // INITIALIZE EVERYTHING
 // ===========================================
 
@@ -541,35 +681,44 @@ async function init() {
   // 1. Initialize Lenis
   initLenis();
 
-  // 2. Preload all frames (shows progress in loader)
+  // 2. Initialize luxury cursor (start immediately)
+  initCustomCursor();
+
+  // 3. Preload all frames (shows progress in loader)
   await preloadFrames();
 
-  // 3. Setup canvas
+  // 4. Setup canvas
   setupCanvas();
 
-  // 4. Hide loader
-  setTimeout(hideLoader, 300);
+  // 5. Hide loader
+  setTimeout(hideLoader, 500);
 
-  // 5. Setup frame scroll trigger
+  // 6. Setup frame scroll trigger
   setupFrameScrollTrigger();
 
-  // 6. Position sections
+  // 7. Position sections
   positionSections();
 
-  // 7. Setup section animations
+  // 8. Setup section animations
   sections.forEach(setupSectionAnimation);
 
-  // 8. Counter animations
+  // 9. Counter animations
   initCounters();
 
-  // 9. Marquee
+  // 10. Marquee
   initMarquee();
 
-  // 10. Dark overlay
+  // 11. Dark overlay
   initDarkOverlay();
 
-  // 11. Hero fade
+  // 12. Hero fade
   initHeroFade();
+
+  // 13. Header scroll effect
+  initHeaderScroll();
+
+  // 14. Magnetic buttons
+  initMagneticButtons();
 
   // Handle resize
   window.addEventListener('resize', () => {
