@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Contrada Ristorante | Due Spicchi Gambero Rosso</title>
+  <meta name="description" content="La Contrada Ristorante - Pizza napoletana premiata con Due Spicchi dal Gambero Rosso. Forno a legna, ingredienti freschi, tradizione autentica.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-content">
+      <span class="loader-brand">LA CONTRADA</span>
+      <div class="loader-progress">
+        <div id="loader-bar"></div>
+      </div>
+      <span id="loader-percent">0%</span>
+    </div>
+  </div>
+
+  <!-- Fixed Header -->
+  <header class="site-header">
+    <nav>
+      <a href="#" class="logo">LA CONTRADA</a>
+      <div class="nav-links">
+        <a href="#pizza">La Pizza</a>
+        <a href="#tradizione">Tradizione</a>
+        <a href="#prenota" class="nav-cta">Prenota</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Canvas Container (Fixed, Right Side) -->
+  <div id="canvas-container">
+    <canvas id="frame-canvas"></canvas>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-standalone" id="hero">
+    <div class="hero-content">
+      <span class="section-label">Ristorante Pizzeria</span>
+      <h1 class="hero-heading">
+        <span class="word">La</span>
+        <span class="word">Contrada</span>
+      </h1>
+      <p class="hero-tagline">Due Spicchi di Eccellenza</p>
+      <p class="hero-award">Premiato Gambero Rosso</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scopri di più</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 5L12 19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Dark Overlay -->
+  <div id="dark-overlay"></div>
+
+  <!-- Marquee Text -->
+  <div class="marquee-wrap" data-scroll-speed="-30">
+    <div class="marquee-text">PIZZA NAPOLETANA FORNO A LEGNA PIZZA NAPOLETANA FORNO A LEGNA PIZZA NAPOLETANA FORNO A LEGNA</div>
+  </div>
+
+  <!-- Scroll Container -->
+  <div id="scroll-container">
+
+    <!-- Section 1: La Nostra Pizza -->
+    <section class="scroll-section section-content align-left"
+             data-enter="8" data-leave="28"
+             data-animation="slide-left"
+             id="pizza">
+      <div class="section-inner">
+        <span class="section-label">01 / La Nostra Pizza</span>
+        <h2 class="section-heading">Fuoco<br>e Passione</h2>
+        <p class="section-body">Dal nostro forno a legna alla tua tavola. Impasto a lunga lievitazione, mozzarella di bufala campana, pomodoro San Marzano. Ogni pizza è un'opera d'arte.</p>
+      </div>
+    </section>
+
+    <!-- Section 2: Ingredienti -->
+    <section class="scroll-section section-content align-left"
+             data-enter="28" data-leave="48"
+             data-animation="fade-up">
+      <div class="section-inner">
+        <span class="section-label">02 / Ingredienti</span>
+        <h2 class="section-heading">Solo<br>Il Meglio</h2>
+        <p class="section-body">Farine selezionate, pomodori raccolti a mano, basilico fresco del nostro orto. La qualità non è un compromesso, è la nostra promessa.</p>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="scroll-section section-stats"
+             data-enter="48" data-leave="68"
+             data-animation="stagger-up"
+             id="tradizione">
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-number" data-value="450" data-decimals="0">0</span>
+          <span class="stat-suffix">°C</span>
+          <span class="stat-label">Temperatura forno</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="90" data-decimals="0">0</span>
+          <span class="stat-suffix">sec</span>
+          <span class="stat-label">Cottura perfetta</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="48" data-decimals="0">0</span>
+          <span class="stat-suffix">h</span>
+          <span class="stat-label">Lievitazione</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" data-value="3" data-decimals="0">0</span>
+          <span class="stat-suffix"></span>
+          <span class="stat-label">Spicchi Gambero Rosso</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Tradizione -->
+    <section class="scroll-section section-content align-left"
+             data-enter="68" data-leave="85"
+             data-animation="scale-up">
+      <div class="section-inner">
+        <span class="section-label">03 / Tradizione</span>
+        <h2 class="section-heading">L'Arte<br>Napoletana</h2>
+        <p class="section-body">Una tradizione che si tramanda da generazioni. Il segreto? Rispetto per gli ingredienti, amore per il mestiere, e la pazienza di chi sa che le cose buone richiedono tempo.</p>
+      </div>
+    </section>
+
+    <!-- CTA Section (Persists) -->
+    <section class="scroll-section section-cta"
+             data-enter="85" data-leave="100"
+             data-animation="clip-reveal"
+             data-persist="true"
+             id="prenota">
+      <div class="section-inner">
+        <span class="section-label">04 / Vieni a Trovarci</span>
+        <h2 class="section-heading">Prenota<br>Il Tuo Tavolo</h2>
+        <p class="section-body">Vivi l'esperienza La Contrada. Ti aspettiamo per farti assaporare la vera pizza napoletana.</p>
+        <a href="https://lacontradaristorante.it" target="_blank" class="cta-button">Prenota Ora</a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
