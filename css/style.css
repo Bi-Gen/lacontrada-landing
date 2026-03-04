@@ -485,48 +485,101 @@ a {
 
 @media (max-width: 768px) {
   :root {
-    --section-padding: 6vw;
+    --section-padding: 7vw;
     --canvas-width: 100%;
     --text-width: 100%;
+  }
+
+  /* Header mobile */
+  .site-header {
+    padding: 1rem var(--section-padding);
+  }
+
+  .logo {
+    font-size: 0.9rem;
   }
 
   .nav-links a:not(.nav-cta) {
     display: none;
   }
 
+  .nav-cta {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  /* Canvas - video dietro al contenuto con gradiente */
   #canvas-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    opacity: 0.3;
+    opacity: 0.5;
+    z-index: 0;
   }
 
+  #canvas-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.7) 0%,
+      rgba(0,0,0,0.3) 50%,
+      rgba(0,0,0,0.7) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Hero mobile */
   .hero-standalone {
     width: 100%;
-    padding-right: var(--section-padding);
+    padding: var(--section-padding);
+    padding-top: 25vh;
     text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
   }
 
   .hero-heading {
-    font-size: clamp(2.5rem, 12vw, 4.5rem);
+    font-size: clamp(2.8rem, 14vw, 5rem);
+    line-height: 0.9;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    margin: 1rem 0;
+  }
+
+  .hero-award {
+    font-size: 0.75rem;
   }
 
   .scroll-indicator {
     left: 50%;
     transform: translateX(-50%);
     align-items: center;
+    bottom: 2rem;
   }
 
+  /* Scroll container mobile */
   #scroll-container {
-    height: 600vh;
+    height: 550vh;
   }
 
+  /* Sections mobile */
   .scroll-section {
     width: 100%;
     text-align: center;
     padding: var(--section-padding);
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+    z-index: 2;
   }
 
   .align-left {
@@ -537,45 +590,128 @@ a {
 
   .section-inner {
     max-width: 100%;
+    background: rgba(0,0,0,0.6);
+    padding: 2rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+
+  .section-heading {
+    font-size: clamp(2rem, 8vw, 3rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
   }
 
   .section-body {
     max-width: 100%;
     margin: 0 auto;
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
+  /* Stats mobile */
   .section-stats {
     width: 100%;
+    padding: var(--section-padding);
+  }
+
+  .section-stats .stats-grid {
+    background: rgba(0,0,0,0.7);
+    padding: 2rem 1.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 2rem 1rem;
   }
 
   .stat-number {
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
+  .stat-suffix {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* CTA mobile */
   .section-cta {
     width: 100%;
     padding: var(--section-padding);
     text-align: center;
   }
 
-  .marquee-text {
-    font-size: 18vw;
+  .section-cta .section-inner {
+    padding: 2.5rem 2rem;
+  }
+
+  .section-cta .section-heading {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
+
+  .cta-button {
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* Marquee mobile */
+  .marquee-wrap {
+    display: none;
+  }
+
+  /* Dark overlay mobile */
+  #dark-overlay {
+    z-index: 1;
   }
 }
 
 @media (max-width: 480px) {
+  :root {
+    --section-padding: 5vw;
+  }
+
+  .hero-heading {
+    font-size: clamp(2.5rem, 15vw, 4rem);
+  }
+
+  .section-inner {
+    padding: 1.5rem;
+  }
+
   .stats-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.5rem 0.5rem;
   }
 
   .stat-number {
-    font-size: clamp(2rem, 12vw, 3rem);
+    font-size: clamp(1.8rem, 12vw, 2.5rem);
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+  }
+
+  .section-heading {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .section-body {
+    font-size: 0.9rem;
   }
 }
 
